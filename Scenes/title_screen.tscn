@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_3hfe8"]
 [ext_resource type="FontFile" uid="uid://dcjf0fn1da6h" path="res://Fonts/Silkscreen-Regular.ttf" id="2_42uth"]
-[ext_resource type="Texture2D" uid="uid://dnxrh5xd873pl" path="res://Images/title.svg" id="2_cwhfp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3547a"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1p3hk"]
+load_path = "res://.godot/imported/title.svg-1b71d04989c22a060e36e554ec6a1d54.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o128w"]
 content_margin_left = 12.0
@@ -70,7 +72,7 @@ theme_override_constants/separation = 50
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(480, 0)
 layout_mode = 2
-texture = ExtResource("2_cwhfp")
+texture = SubResource("CompressedTexture2D_1p3hk")
 expand_mode = 5
 stretch_mode = 4
 

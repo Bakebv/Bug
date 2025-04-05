@@ -5,9 +5,23 @@ class_name Player
 
 var player_name: String
 var bug: Bug
+var abdomen: Node
+var antennae: Node
+var head: Node
+var legs: Node
+var thorax: Node
+var wings: Node
 
 func set_player( name: String ) -> void:
 	bug = $Bug
+	
+	abdomen = $PanelContainer/Abdomen
+	antennae = $PanelContainer/Antennae
+	head = $PanelContainer/Head
+	legs = $PanelContainer/Legs
+	thorax = $PanelContainer/Thorax
+	wings = $PanelContainer/Wings
+	
 	var player_label
 	
 	if( name == "" ):
@@ -30,6 +44,7 @@ func handle_roll( value: int ) -> int:
 				return Globals.response_codes.HAS_ABDOMEN
 			
 			if( bug.add_part( "ABDOMEN" ) ):
+				abdomen.show()
 				return Globals.response_codes.ADDED_ABDOMEN
 			return Globals.response_codes.CANNOT_ADD_ABDOMEN
 		"ANTENNAE":
@@ -37,6 +52,7 @@ func handle_roll( value: int ) -> int:
 				return Globals.response_codes.HAS_ANTENNAE
 			
 			if( bug.add_part( "ANTENNAE" ) ):
+				antennae.show()
 				return Globals.response_codes.ADDED_ANTENNAE
 			return Globals.response_codes.CANNOT_ADD_ANTENNAE
 		"HEAD":
@@ -44,6 +60,7 @@ func handle_roll( value: int ) -> int:
 				return Globals.response_codes.HAS_HEAD
 			
 			if( bug.add_part( "HEAD" ) ):
+				head.show()
 				return Globals.response_codes.ADDED_HEAD
 			return Globals.response_codes.CANNOT_ADD_HEAD
 		"LEGS":
@@ -51,6 +68,7 @@ func handle_roll( value: int ) -> int:
 				return Globals.response_codes.HAS_LEGS
 			
 			if( bug.add_part( "LEGS" ) ):
+				legs.show()
 				return Globals.response_codes.ADDED_LEGS
 			return Globals.response_codes.CANNOT_ADD_LEGS
 		"THORAX":
@@ -58,6 +76,7 @@ func handle_roll( value: int ) -> int:
 				return Globals.response_codes.HAS_THORAX
 			
 			if( bug.add_part( "THORAX" ) ):
+				thorax.show()
 				return Globals.response_codes.ADDED_THORAX
 			return Globals.response_codes.CANNOT_ADD_THORAX
 		"WINGS":
@@ -65,6 +84,7 @@ func handle_roll( value: int ) -> int:
 				return Globals.response_codes.HAS_WINGS
 			
 			if( bug.add_part( "WINGS" ) ):
+				wings.show()
 				return Globals.response_codes.ADDED_WINGS
 			return Globals.response_codes.CANNOT_ADD_WINGS
 		_:

@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cveelmtmrqdw5"]
+[gd_scene load_steps=12 format=3 uid="uid://cveelmtmrqdw5"]
 
 [ext_resource type="Script" path="res://Prefabs/PlayArea/Player.gd" id="1_21tnw"]
 [ext_resource type="FontFile" uid="uid://dcjf0fn1da6h" path="res://Fonts/Silkscreen-Regular.ttf" id="1_lyfvv"]
 [ext_resource type="Script" path="res://Prefabs/PlayArea/Bug.gd" id="2_b6qy2"]
 [ext_resource type="Script" path="res://Prefabs/PlayArea/UIManager.gd" id="2_tstjy"]
+[ext_resource type="Texture2D" uid="uid://daeq3333rkamk" path="res://Images/wings.png" id="5_xc8dl"]
+[ext_resource type="Texture2D" uid="uid://ba6vgmkn48nv1" path="res://Images/antennae.png" id="6_rfdoq"]
+[ext_resource type="Texture2D" uid="uid://dxpopoxu1fhsx" path="res://Images/head.png" id="7_qkov0"]
+[ext_resource type="Texture2D" uid="uid://b2166qa5om6fs" path="res://Images/abdomen.png" id="8_ulg8y"]
+[ext_resource type="Texture2D" uid="uid://r0k4d1pr10ky" path="res://Images/thorax.png" id="9_e1783"]
+[ext_resource type="Texture2D" uid="uid://btrty0hah7cn0" path="res://Images/legs.png" id="10_1vljw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkff2"]
+bg_color = Color(0.917647, 0.882353, 0.701961, 1)
 
 [node name="PlayArea" type="VBoxContainer" node_paths=PackedStringArray("bug_label")]
 custom_minimum_size = Vector2(400, 600)
@@ -23,8 +32,43 @@ theme_override_fonts/font = ExtResource("1_lyfvv")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color(0.227451, 0.447059, 0.380392, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_xkff2")
+
+[node name="Wings" type="TextureRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_xc8dl")
+stretch_mode = 3
+
+[node name="Abdomen" type="TextureRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_ulg8y")
+stretch_mode = 3
+
+[node name="Antennae" type="TextureRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("6_rfdoq")
+stretch_mode = 3
+
+[node name="Head" type="TextureRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("7_qkov0")
+stretch_mode = 3
+
+[node name="Thorax" type="TextureRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_e1783")
+stretch_mode = 3
+
+[node name="Legs" type="TextureRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("10_1vljw")
+stretch_mode = 3

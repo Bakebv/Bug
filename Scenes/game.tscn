@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgldhng6lvhqu"]
+[gd_scene load_steps=8 format=3 uid="uid://bgldhng6lvhqu"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_0l1vx"]
 [ext_resource type="Script" path="res://Scripts/game_ui_manager.gd" id="2_midmr"]
@@ -13,11 +13,38 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("UIManager", "GameUI", "roll_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lyl43"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s60d1"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0470588, 0.415686, 0.760784, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_isxdw"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.596078, 0.0627451, 0.368627, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("UIManager", "GameUI", "roll_button", "game_over_ui", "winner_label")]
 script = ExtResource("1_0l1vx")
 UIManager = NodePath("PanelContainer/MarginContainer/GameUI/GameUIManager")
 GameUI = NodePath("PanelContainer/MarginContainer/GameUI")
 roll_button = NodePath("PanelContainer/MarginContainer/GameUI/GameUIManager/RollButton")
+game_over_ui = NodePath("PanelContainer/GameOverUI")
+winner_label = NodePath("PanelContainer/GameOverUI/MarginContainer/VBoxContainer/WinnerName")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 offset_right = 1154.0
@@ -67,4 +94,66 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_jwhht")
 text = "Roll"
 
+[node name="GameOverUI" type="PanelContainer" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lyl43")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/GameOverUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/GameOverUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/GameOverUI/MarginContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_suurv")
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[wave amp=30 freq=8]The Winner Is...[/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="WinnerName" type="RichTextLabel" parent="PanelContainer/GameOverUI/MarginContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.784314, 0.643137, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_suurv")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/GameOverUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 6
+
+[node name="PlayAgain" type="Button" parent="PanelContainer/GameOverUI/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_suurv")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_s60d1")
+text = "Play Again"
+
+[node name="Quit" type="Button" parent="PanelContainer/GameOverUI/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_suurv")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_isxdw")
+text = "Quit"
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/GameUI/GameUIManager/RollButton" to="." method="handle_dice_roll"]
+[connection signal="pressed" from="PanelContainer/GameOverUI/MarginContainer/VBoxContainer/VBoxContainer/PlayAgain" to="." method="_start_game"]
+[connection signal="pressed" from="PanelContainer/GameOverUI/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

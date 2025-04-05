@@ -3,6 +3,8 @@ extends Node
 @export var UIManager: GameUIManager
 @export var GameUI: Node
 @export var roll_button: Node
+@export var game_over_ui: Node
+@export var winner_label: Node
 
 var response_prefab = preload("res://Prefabs/GameResponse/game_response.tscn")
 var player_prefab = preload("res://Prefabs/PlayArea/play_area.tscn")
@@ -11,20 +13,42 @@ var player: Player
 var opponent: Player
 var current_player: Player = null
 
+var opponent_names: Array[String]
+
 var dice: Dice = Dice.new()
+var tree: SceneTree
 
 func _ready() -> void:
+	tree = get_tree()
+	
 	dice.set_number_of_sides( 6 )
 	
+	opponent_names = [
+		"Steve",
+		"Beth",
+		"Thomas",
+		"Jane",
+		"Frederick",
+		"Zoe"
+	]
+	
+	_start_game()
+
+
+
+func _start_game() -> void:
+	game_over_ui.hide()
+		
 	player = player_prefab.instantiate()
 	player.set_player( "" )
 	GameUI.add_child( player )
 	
 	opponent = player_prefab.instantiate()
-	opponent.set_player( "Steve" )
+	opponent.set_player( opponent_names[ dice.roll_dice() - 1 ] )
 	GameUI.add_child( opponent )
 	
 	_change_players()
+
 
 
 
@@ -40,7 +64,13 @@ func handle_dice_roll() -> void:
 	await get_tree().create_timer( 0.5 ).timeout
 	
 	if current_player.is_bug_completed():
-		print( "%s Has Won" % current_player.player_name )
+		var text = "[rainbow]%s![/rainbow]" % current_player.player_name
+		winner_label.set_text( text )
+		
+		game_over_ui.show()
+		player.queue_free()
+		opponent.queue_free()
+		UIManager.clear_messages()
 	else:
 		_change_players()
 
@@ -51,15 +81,6 @@ func _generate_response( text: String ) -> void:
 	
 	response.set_text( text );
 	UIManager.update_ui( response )
-
-
-
-func _set_computer_quip() -> String:
-	var response
-	response = "[color=firebrick]%s:[/color] \n" % opponent.player_name
-	response += "Oof! But you haven't won yet!"
-	
-	return response
 
 
 
@@ -81,3 +102,10 @@ func _change_players() -> void:
 	if current_player == opponent:
 		await get_tree().create_timer( 0.5 ).timeout
 		handle_dice_roll()
+
+
+
+
+func _on_quit_pressed() -> void:
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	tree.quit()
