@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s422x6j8u508"
-path="res://.godot/imported/title.svg-1b71d04989c22a060e36e554ec6a1d54.ctex"
+uid="uid://b2166qa5om6fs"
+path="res://.godot/imported/abdomen.png-15751391eb42c213ca5d193e745804e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/title.svg"
-dest_files=["res://.godot/imported/title.svg-1b71d04989c22a060e36e554ec6a1d54.ctex"]
+source_file="res://Images/abdomen.png"
+dest_files=["res://.godot/imported/abdomen.png-15751391eb42c213ca5d193e745804e0.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

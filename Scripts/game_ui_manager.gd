@@ -15,6 +15,7 @@ func _ready() -> void:
 	scrollbar.connect( "changed", _scroll_to_bottom )
 
 
+
 func update_ui( prefab: Node ) -> void:
 	response_ui.add_child( prefab )
 	if response_ui.get_child_count() > max_responses:
@@ -22,7 +23,15 @@ func update_ui( prefab: Node ) -> void:
 		oldest_respone.queue_free()
 
 
+
 func _scroll_to_bottom() -> void:
 	if( scrollbar.max_value != current_scroll ):
 		current_scroll = scrollbar.max_value
 		scroller.scroll_vertical = scrollbar.max_value
+
+
+
+func clear_messages() -> void:
+	var messages = response_ui.get_children()
+	for message in messages:
+		message.queue_free()
