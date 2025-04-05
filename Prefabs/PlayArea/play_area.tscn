@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cveelmtmrqdw5"]
+
+[ext_resource type="Script" path="res://Prefabs/PlayArea/Player.gd" id="1_21tnw"]
+[ext_resource type="FontFile" uid="uid://dcjf0fn1da6h" path="res://Fonts/Silkscreen-Regular.ttf" id="1_lyfvv"]
+[ext_resource type="Script" path="res://Prefabs/PlayArea/Bug.gd" id="2_b6qy2"]
+[ext_resource type="Script" path="res://Prefabs/PlayArea/UIManager.gd" id="2_tstjy"]
+
+[node name="PlayArea" type="VBoxContainer" node_paths=PackedStringArray("bug_label")]
+custom_minimum_size = Vector2(400, 600)
+size_flags_horizontal = 3
+script = ExtResource("1_21tnw")
+bug_label = NodePath("PlayerLabel")
+
+[node name="Bug" type="Node" parent="."]
+script = ExtResource("2_b6qy2")
+
+[node name="UIManager" type="Node" parent="."]
+script = ExtResource("2_tstjy")
+
+[node name="PlayerLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lyfvv")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.227451, 0.447059, 0.380392, 1)

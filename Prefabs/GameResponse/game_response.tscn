@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddh53i83rcfym"]
+
+[ext_resource type="Script" path="res://Prefabs/GameResponse/game_response.gd" id="1_3ukst"]
+[ext_resource type="FontFile" uid="uid://dcjf0fn1da6h" path="res://Fonts/Silkscreen-Regular.ttf" id="2_pgjyg"]
+
+[node name="GameResponse" type="VBoxContainer" node_paths=PackedStringArray("response_text")]
+script = ExtResource("1_3ukst")
+response_text = NodePath("Responsetext")
+
+[node name="Responsetext" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("2_pgjyg")
+bbcode_enabled = true
+text = "It is the player's turn"
+fit_content = true

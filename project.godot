@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="Bug"
+run/main_scene="res://Scenes/title_screen.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Globals="*res://Autoloads/Globals.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor]
 
